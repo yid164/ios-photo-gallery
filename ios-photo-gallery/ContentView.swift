@@ -18,23 +18,7 @@ struct ContentView: View {
                     GridItem(.flexible(minimum: 100, maximum: 200), spacing: 10, alignment: .top)
                 ], spacing: 10, content: {
                     ForEach(ImageModel.smaples, id: \.self) { model in
-                        VStack(alignment: .leading, spacing: 3) {
-                            ZStack {
-                                Rectangle()
-                                .fill(Color(.gray))
-                                .aspectRatio(3/4, contentMode: .fit)
-                                        
-                                Image(uiImage: model.beforeImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .layoutPriority(-1)
-                            }
-                            .clipped()
-                            .cornerRadius(22)
-
-                            Text(model.date)
-                                .font(.system(size: 13, weight: .semibold))
-                        }
+                        ImageCard(imageModel: model)
                     }
                 }).padding(.horizontal, 10)
             }

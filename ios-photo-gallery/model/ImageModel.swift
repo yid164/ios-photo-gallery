@@ -13,7 +13,8 @@ struct ImageModel: Hashable {
     let beforeImage: UIImage
     let afterImage: UIImage
     
-    static var smaples: [ImageModel] = [
+    static var smaples: [ImageModel?] = [
+        nil,
         ImageModel(date: "April 10, 2021", beforeImage: UIImage(imageLiteralResourceName: "p1.HEIC"), afterImage: UIImage(imageLiteralResourceName: "p2.HEIC")),
         ImageModel(date: "April 11, 2021", beforeImage: UIImage(imageLiteralResourceName: "p3.HEIC"), afterImage: UIImage(imageLiteralResourceName: "p4.HEIC")),
         ImageModel(date: "April 12, 2021", beforeImage: UIImage(imageLiteralResourceName: "p5.HEIC"), afterImage: UIImage(imageLiteralResourceName: "p6.HEIC")),
