@@ -32,6 +32,7 @@
 		DACD1CC9267A6E9C00E44644 /* p10.HEIC in Resources */ = {isa = PBXBuildFile; fileRef = DACD1CB4267A6E9C00E44644 /* p10.HEIC */; };
 		DACD1CCA267A6E9C00E44644 /* p18.HEIC in Resources */ = {isa = PBXBuildFile; fileRef = DACD1CB5267A6E9C00E44644 /* p18.HEIC */; };
 		DACD1CCB267A6E9C00E44644 /* p21.JPG in Resources */ = {isa = PBXBuildFile; fileRef = DACD1CB6267A6E9C00E44644 /* p21.JPG */; };
+		DACD1CCF267A72FD00E44644 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACD1CCE267A72FD00E44644 /* ImageModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		DACD1CB4267A6E9C00E44644 /* p10.HEIC */ = {isa = PBXFileReference; lastKnownFileType = file; path = p10.HEIC; sourceTree = "<group>"; };
 		DACD1CB5267A6E9C00E44644 /* p18.HEIC */ = {isa = PBXFileReference; lastKnownFileType = file; path = p18.HEIC; sourceTree = "<group>"; };
 		DACD1CB6267A6E9C00E44644 /* p21.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p21.JPG; sourceTree = "<group>"; };
+		DACD1CCE267A72FD00E44644 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,8 @@
 		DA8ED31D267952FB00D41D52 /* ios-photo-gallery */ = {
 			isa = PBXGroup;
 			children = (
+				DACD1CCD267A726100E44644 /* model */,
+				DACD1CCC267A723000E44644 /* views */,
 				DACD1CA1267A6E7C00E44644 /* pics */,
 				DA8ED31E267952FB00D41D52 /* ios_photo_galleryApp.swift */,
 				DA8ED320267952FB00D41D52 /* ContentView.swift */,
@@ -138,6 +142,21 @@
 				DACD1CB6267A6E9C00E44644 /* p21.JPG */,
 			);
 			path = pics;
+			sourceTree = "<group>";
+		};
+		DACD1CCC267A723000E44644 /* views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		DACD1CCD267A726100E44644 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				DACD1CCE267A72FD00E44644 /* ImageModel.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA8ED321267952FB00D41D52 /* ContentView.swift in Sources */,
+				DACD1CCF267A72FD00E44644 /* ImageModel.swift in Sources */,
 				DA8ED31F267952FB00D41D52 /* ios_photo_galleryApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

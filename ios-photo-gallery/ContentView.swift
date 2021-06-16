@@ -13,22 +13,30 @@ struct ContentView: View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: [
-                    GridItem(.flexible(minimum: 100, maximum: 200), spacing: 12),
-                    GridItem(.flexible(minimum: 100, maximum: 200), spacing: 12),
-                    GridItem(.flexible(minimum: 100, maximum: 200), spacing: 12)
-                ], spacing: 12, content: {
-                    ForEach(0..<20, id: \.self) { num in
-                        VStack(alignment: .leading) {
-                            Spacer()
-                                .frame(width: 100, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                .background(Color.blue)
-                            Text("Date")
-                                .font(.system(size: 16, weight: .semibold))
+                    GridItem(.flexible(minimum: 100, maximum: 200), spacing: 10, alignment: .top),
+                    GridItem(.flexible(minimum: 100, maximum: 200), spacing: 10, alignment: .top),
+                    GridItem(.flexible(minimum: 100, maximum: 200), spacing: 10, alignment: .top)
+                ], spacing: 10, content: {
+                    ForEach(ImageModel.smaples, id: \.self) { model in
+                        VStack(alignment: .leading, spacing: 3) {
+                            ZStack {
+                                Rectangle()
+                                .fill(Color(.gray))
+                                .aspectRatio(3/4, contentMode: .fit)
+                                        
+                                Image(uiImage: model.beforeImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .layoutPriority(-1)
+                            }
+                            .clipped()
+                            .cornerRadius(22)
+
+                            Text(model.date)
+                                .font(.system(size: 13, weight: .semibold))
                         }
-                        .padding()
-                        .background(Color.red)
                     }
-                }).padding(.horizontal, 12)
+                }).padding(.horizontal, 10)
             }
             .navigationTitle("Photo Gallery")
             
