@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ImageDetailView: View {
-    let imageModel: ImageModel
+    let imageModel: ImageModel?
     
     @State var showMode: ShowMode = ShowMode.after
     @Environment(\.presentationMode) var pm
     
-    init(imageModel: ImageModel) {
+    init(imageModel: ImageModel?) {
         self.imageModel = imageModel
     }
     
@@ -24,18 +24,26 @@ struct ImageDetailView: View {
                     Rectangle()
                     .fill(Color(.gray))
                     .aspectRatio(3/4, contentMode: .fit)
-                           
                     switch showMode {
                     case .after:
-                        Image(uiImage: imageModel.afterImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .layoutPriority(-1)
+                        if imageModel == nil {
+                            Text("Add After Photo")
+                        } else {
+                            Image(uiImage: imageModel!.afterImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .layoutPriority(-1)
+                        }
+
                     case .before:
-                        Image(uiImage: imageModel.beforeImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .layoutPriority(-1)
+                        if imageModel == nil {
+                            Text("Add Before Photo")
+                        } else {
+                            Image(uiImage: imageModel!.beforeImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .layoutPriority(-1)
+                        }
                     }
                 }
                 .clipped()
@@ -47,7 +55,7 @@ struct ImageDetailView: View {
                 .pickerStyle(SegmentedPickerStyle())
             }
             .padding(.horizontal, 10)
-            .navigationTitle(Text(imageModel.date))
+            .navigationTitle(Text( imageModel == nil ? Calendar.current.description : imageModel!.date))
             .navigationBarItems(leading: Button(action: {
                 pm.wrappedValue.dismiss()
             }) {
