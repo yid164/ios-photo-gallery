@@ -19,7 +19,7 @@ struct ImageDetailView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            ScrollView(showsIndicators: false) {
                 ZStack {
                     Rectangle()
                     .fill(Color(.gray))
@@ -38,6 +38,8 @@ struct ImageDetailView: View {
                         .layoutPriority(-1)
                     }
                 }
+                .clipped()
+                .cornerRadius(22)
                 
                 Picker("", selection: $showMode) {
                     ForEach(ShowMode.allCases, id: \.self) { Text($0.rawValue) }

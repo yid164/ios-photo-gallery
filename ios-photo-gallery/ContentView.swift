@@ -9,6 +9,9 @@ import SwiftUI
 import PhotosUI
 
 struct ContentView: View {
+    
+    @State var samples = ImageModel.smaples
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -17,7 +20,7 @@ struct ContentView: View {
                     GridItem(.flexible(minimum: 100, maximum: 200), spacing: 10, alignment: .top),
                     GridItem(.flexible(minimum: 100, maximum: 200), spacing: 10, alignment: .top)
                 ], spacing: 10, content: {
-                    ForEach(ImageModel.smaples, id: \.self) { model in
+                    ForEach(samples, id: \.self) { model in
                         ImageCard(imageModel: model)
                     }
                 }).padding(.horizontal, 10)

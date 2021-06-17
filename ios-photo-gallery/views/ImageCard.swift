@@ -33,7 +33,7 @@ struct ImageCard: View {
             }
             .actionSheet(isPresented: $showActionSheet) {
                 ActionSheet(
-                    title: Text("Which ratio would you like to use?"),
+                    title: Text("Please select an option to choose photoes"),
                     buttons: [
                         .default(Text("Pick from your gallery"), action: {}),
                         .default(Text("Take new picture"), action: {}),
