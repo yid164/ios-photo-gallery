@@ -20,8 +20,8 @@ struct ContentView: View {
                     GridItem(.flexible(minimum: 100, maximum: 200), spacing: 10, alignment: .top),
                     GridItem(.flexible(minimum: 100, maximum: 200), spacing: 10, alignment: .top)
                 ], spacing: 10, content: {
-                    ForEach(samples, id: \.self) { model in
-                        ImageCard(imageModel: model)
+                    ForEach(0..<samples.count, id: \.self) { index in
+                        ImageCard(imageModel: $samples[index])
                     }
                 }).padding(.horizontal, 10)
             }

@@ -10,8 +10,11 @@ import Photos
 import PhotosUI
 
 struct PhotoPicker: UIViewControllerRepresentable {
-    @Binding var images: [UIImage]
+    //@Binding var image: UIImage?
     @Binding var isPresented: Bool
+    
+    let action: (UIImage?) -> ()
+    
     var itemProviders: [NSItemProvider] = []
     
     func makeUIViewController(context: Context) -> PHPickerViewController {
@@ -37,7 +40,6 @@ struct PhotoPicker: UIViewControllerRepresentable {
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
             if !results.isEmpty {
                 parent.itemProviders = []
-                parent.images = []
             }
             parent.itemProviders = results.map(\.itemProvider)
             loadImage()
@@ -48,11 +50,14 @@ struct PhotoPicker: UIViewControllerRepresentable {
                 if itemProvider.canLoadObject(ofClass: UIImage.self) {
                     itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
                         if let image = image as? UIImage {
-                            self.parent.images.append(image)
+                            self.parent.action(image)
                         } else {
                             print("Could not load image", error?.localizedDescription ?? "")
+                            self.parent.action(nil)
                             
                         }
+                        self.parent.isPresented = false
+                        
                     }
                 }
             }

@@ -9,11 +9,9 @@ import SwiftUI
 import PhotosUI
 
 struct ImageCard: View {
-    let imageModel: ImageModel?
+    @Binding var imageModel: ImageModel?
     
     @State private var showDetails: Bool = false
-    @State private var showActionSheet: Bool = false
-    @State private var showPhotoPicker: Bool = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
@@ -21,11 +19,11 @@ struct ImageCard: View {
                 Rectangle()
                 .fill(Color(.gray))
                 .aspectRatio(3/4, contentMode: .fit)
-                if imageModel == nil {
+                if imageModel == nil || imageModel?.afterImage == nil {
                     Text("Add New Photos")
                         .font(.system(size: 13, weight: .semibold))
                 } else {
-                    Image(uiImage: imageModel!.afterImage)
+                    Image(uiImage: imageModel!.afterImage!)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .layoutPriority(-1)
@@ -45,7 +43,7 @@ struct ImageCard: View {
             showDetails = true
         }
         .sheet(isPresented: $showDetails, content: {
-            ImageDetailView(imageModel: imageModel)
+            ImageDetailView(imageModel: $imageModel)
         })
     }
 }

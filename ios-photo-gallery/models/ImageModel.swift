@@ -10,8 +10,8 @@ import SwiftUI
 
 struct ImageModel: Hashable {
     let date: String
-    let beforeImage: UIImage
-    let afterImage: UIImage
+    var beforeImage: UIImage? = nil
+    var afterImage: UIImage? = nil
     
     static var smaples: [ImageModel?] = [
         ImageModel(date: "April 10, 2021", beforeImage: UIImage(imageLiteralResourceName: "p1.HEIC"), afterImage: UIImage(imageLiteralResourceName: "p2.HEIC")),
