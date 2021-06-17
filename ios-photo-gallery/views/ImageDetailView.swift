@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct ImageDetailView: View {
-    let imageModel: ImageModel
+    @Binding var imageModel: ImageModel?
     
     @State var showMode: ShowMode = ShowMode.after
     @Environment(\.presentationMode) var pm
     
-    init(imageModel: ImageModel) {
-        self.imageModel = imageModel
+    @State private var showActionSheet: Bool = false
+    @State private var showPhotoPicker: Bool = false
+    @State private var imagePicked: UIImage?
+    
+    init(imageModel: Binding<ImageModel?>) {
+        self._imageModel = imageModel
     }
+    
+    var todayString: String {
+        let today = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        return dateFormatter.string(from: today)
+    }
+
+    
     
     var body: some View {
         NavigationView {
@@ -24,22 +37,57 @@ struct ImageDetailView: View {
                     Rectangle()
                     .fill(Color(.gray))
                     .aspectRatio(3/4, contentMode: .fit)
-                           
                     switch showMode {
                     case .after:
-                        Image(uiImage: imageModel.afterImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .layoutPriority(-1)
+                        if imageModel == nil || imageModel?.afterImage == nil {
+                            Text("Add After Photo")
+                        } else {
+                            Image(uiImage: imageModel!.afterImage!)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .layoutPriority(-1)
+                        }
+
                     case .before:
-                        Image(uiImage: imageModel.beforeImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .layoutPriority(-1)
+                        if imageModel == nil || imageModel?.beforeImage == nil {
+                            Text("Add Before Photo")
+                        } else {
+                            Image(uiImage: imageModel!.beforeImage!)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .layoutPriority(-1)
+                        }
                     }
                 }
                 .clipped()
                 .cornerRadius(22)
+                .onTapGesture {
+                    showActionSheet = true
+                }
+                .actionSheet(isPresented: $showActionSheet, content: {
+                    ActionSheet(
+                        title: Text("Please select an option to upload the photo"),
+                        buttons: [
+                            .default(Text("Pick from your photo gallery"), action: { self.showPhotoPicker = true }),
+                            .default(Text("Take photo by your camera"), action: { }),
+                            .cancel()
+                        ]
+                    )
+                })
+                .sheet(isPresented: $showPhotoPicker, content: {
+                    PhotoPicker(isPresented: $showPhotoPicker) { image in
+                        if imageModel == nil {
+                            imageModel = ImageModel(date: todayString)
+                        }
+                        switch showMode {
+                        case .after:
+                            imageModel!.afterImage = image
+                        case .before:
+                            imageModel!.beforeImage = image
+                        }
+                        
+                    }
+                })
                 
                 Picker("", selection: $showMode) {
                     ForEach(ShowMode.allCases, id: \.self) { Text($0.rawValue) }
@@ -47,7 +95,7 @@ struct ImageDetailView: View {
                 .pickerStyle(SegmentedPickerStyle())
             }
             .padding(.horizontal, 10)
-            .navigationTitle(Text(imageModel.date))
+            .navigationTitle(Text( imageModel == nil ? todayString : imageModel!.date))
             .navigationBarItems(leading: Button(action: {
                 pm.wrappedValue.dismiss()
             }) {

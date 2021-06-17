@@ -11,6 +11,8 @@
 		DA8ED321267952FB00D41D52 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8ED320267952FB00D41D52 /* ContentView.swift */; };
 		DA8ED323267952FC00D41D52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA8ED322267952FC00D41D52 /* Assets.xcassets */; };
 		DA8ED326267952FC00D41D52 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA8ED325267952FC00D41D52 /* Preview Assets.xcassets */; };
+		DA98041B267BA6BA00E839B6 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA98041A267BA6BA00E839B6 /* PhotoPicker.swift */; };
+		DA98041D267BB33700E839B6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA98041C267BB33700E839B6 /* Extensions.swift */; };
 		DACD1CB7267A6E9C00E44644 /* p14.HEIC in Resources */ = {isa = PBXBuildFile; fileRef = DACD1CA2267A6E9A00E44644 /* p14.HEIC */; };
 		DACD1CB8267A6E9C00E44644 /* p8.JPG in Resources */ = {isa = PBXBuildFile; fileRef = DACD1CA3267A6E9A00E44644 /* p8.JPG */; };
 		DACD1CB9267A6E9C00E44644 /* p1.HEIC in Resources */ = {isa = PBXBuildFile; fileRef = DACD1CA4267A6E9A00E44644 /* p1.HEIC */; };
@@ -44,6 +46,8 @@
 		DA8ED322267952FC00D41D52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA8ED325267952FC00D41D52 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DA8ED327267952FC00D41D52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA98041A267BA6BA00E839B6 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		DA98041C267BB33700E839B6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DACD1CA2267A6E9A00E44644 /* p14.HEIC */ = {isa = PBXFileReference; lastKnownFileType = file; path = p14.HEIC; sourceTree = "<group>"; };
 		DACD1CA3267A6E9A00E44644 /* p8.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = p8.JPG; sourceTree = "<group>"; };
 		DACD1CA4267A6E9A00E44644 /* p1.HEIC */ = {isa = PBXFileReference; lastKnownFileType = file; path = p1.HEIC; sourceTree = "<group>"; };
@@ -100,7 +104,8 @@
 		DA8ED31D267952FB00D41D52 /* ios-photo-gallery */ = {
 			isa = PBXGroup;
 			children = (
-				DACD1CCD267A726100E44644 /* model */,
+				DA980419267BA68E00E839B6 /* extensions */,
+				DACD1CCD267A726100E44644 /* models */,
 				DACD1CCC267A723000E44644 /* views */,
 				DACD1CA1267A6E7C00E44644 /* pics */,
 				DA8ED31E267952FB00D41D52 /* ios_photo_galleryApp.swift */,
@@ -118,6 +123,14 @@
 				DA8ED325267952FC00D41D52 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DA980419267BA68E00E839B6 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DA98041C267BB33700E839B6 /* Extensions.swift */,
+			);
+			path = extensions;
 			sourceTree = "<group>";
 		};
 		DACD1CA1267A6E7C00E44644 /* pics */ = {
@@ -157,12 +170,13 @@
 			path = views;
 			sourceTree = "<group>";
 		};
-		DACD1CCD267A726100E44644 /* model */ = {
+		DACD1CCD267A726100E44644 /* models */ = {
 			isa = PBXGroup;
 			children = (
 				DACD1CCE267A72FD00E44644 /* ImageModel.swift */,
+				DA98041A267BA6BA00E839B6 /* PhotoPicker.swift */,
 			);
-			path = model;
+			path = models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,9 +271,11 @@
 			files = (
 				DA8ED321267952FB00D41D52 /* ContentView.swift in Sources */,
 				DACD1CCF267A72FD00E44644 /* ImageModel.swift in Sources */,
+				DA98041B267BA6BA00E839B6 /* PhotoPicker.swift in Sources */,
 				DA8ED31F267952FB00D41D52 /* ios_photo_galleryApp.swift in Sources */,
 				DACD1CD2267A9D8B00E44644 /* ImageCard.swift in Sources */,
 				DACD1CD4267AA10E00E44644 /* ImageDetailView.swift in Sources */,
+				DA98041D267BB33700E839B6 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
