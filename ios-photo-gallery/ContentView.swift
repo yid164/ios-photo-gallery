@@ -26,7 +26,6 @@ struct ContentView: View {
                 }).padding(.horizontal, 10)
             }
             .navigationTitle("Photo Gallery")
-            
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }

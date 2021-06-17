@@ -6,37 +6,44 @@
 //
 
 import SwiftUI
-import Photos
 import PhotosUI
 
 struct PhotoPicker: UIViewControllerRepresentable {
-    //@Binding var image: UIImage?
     @Binding var isPresented: Bool
-    
+    let mode: PhotoPickerMode
     let action: (UIImage?) -> ()
     
     var itemProviders: [NSItemProvider] = []
     
-    func makeUIViewController(context: Context) -> PHPickerViewController {
-        var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 1
-        configuration.filter = .images
-        let controller = PHPickerViewController(configuration: configuration)
-        controller.delegate = context.coordinator
-        return controller
+    func makeUIViewController(context: Context) -> UIViewController {
+        if mode == PhotoPickerMode.gallery {
+            var configuration = PHPickerConfiguration()
+            configuration.selectionLimit = 1
+            configuration.filter = .images
+            let controller = PHPickerViewController(configuration: configuration)
+            controller.delegate = context.coordinator
+            return controller
+        } else {
+            let controller = UIImagePickerController()
+            controller.sourceType = .camera
+            controller.delegate = context.coordinator
+            return controller
+        }
     }
-    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) { }
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) { }
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
     
-    class Coordinator: PHPickerViewControllerDelegate {
-      
+    class Coordinator: NSObject, PHPickerViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
         private var parent: PhotoPicker
         
         init(_ parent: PhotoPicker) {
             self.parent = parent
         }
+        
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
             if !results.isEmpty {
                 parent.itemProviders = []
@@ -57,10 +64,23 @@ struct PhotoPicker: UIViewControllerRepresentable {
                             
                         }
                         self.parent.isPresented = false
-                        
                     }
                 }
             }
         }
+        
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            self.parent.isPresented = false
+        }
+        
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            let image = info[.originalImage] as! UIImage
+            self.parent.action(image)
+            self.parent.isPresented = false
+        }
     }
+}
+
+enum PhotoPickerMode {
+    case camera, gallery
 }
