@@ -16,6 +16,7 @@ struct ImageDetailView: View {
     @State private var showActionSheet: Bool = false
     @State private var showPhotoPicker: Bool = false
     @State private var imagePicked: UIImage?
+    @State private var pickerMode: PhotoPickerMode?
     
     init(imageModel: Binding<ImageModel?>) {
         self._imageModel = imageModel
@@ -68,14 +69,14 @@ struct ImageDetailView: View {
                     ActionSheet(
                         title: Text("Please select an option to upload the photo"),
                         buttons: [
-                            .default(Text("Pick from your photo gallery"), action: { self.showPhotoPicker = true }),
-                            .default(Text("Take photo by your camera"), action: { }),
+                            .default(Text("Pick from your photo gallery"), action: { self.showPhotoPicker = true; pickerMode = PhotoPickerMode.gallery }),
+                            .default(Text("Take photo by your camera"), action: { self.showPhotoPicker = true; pickerMode = PhotoPickerMode.camera }),
                             .cancel()
                         ]
                     )
                 })
                 .sheet(isPresented: $showPhotoPicker, content: {
-                    PhotoPicker(isPresented: $showPhotoPicker) { image in
+                    PhotoPicker(isPresented: $showPhotoPicker, mode: pickerMode!) { image in
                         if imageModel == nil {
                             imageModel = ImageModel(date: todayString)
                         }
@@ -85,7 +86,6 @@ struct ImageDetailView: View {
                         case .before:
                             imageModel!.beforeImage = image
                         }
-                        
                     }
                 })
                 
