@@ -26,7 +26,5 @@ struct ImageModel: Hashable {
         ImageModel(date: "April 19, 2021", beforeImage: UIImage(imageLiteralResourceName: "p19.HEIC"), afterImage: UIImage(imageLiteralResourceName: "p20.HEIC")),
         nil
     ]
-    
-    
 }
 
